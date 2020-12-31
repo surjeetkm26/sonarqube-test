@@ -1,6 +1,6 @@
 node{
 	stage("Git clone"){
-		git credentialsId: 'GITHUB_CREDENTIALS', url: 'https://github.com/surjeetkm26/sonarqube-repo.git'
+		git credentialsId: 'GITHUB_CREDENTIALS', url: 'https://github.com/surjeetkm26/sonarqube-test.git'
 	}
 	stage("Maven clean build artifact"){
 		def mavenHome= tool name: "Maven", type: "maven"

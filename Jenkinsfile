@@ -14,5 +14,14 @@ node{
 				def command= "${mavenHome}/bin/mvn"
 				bat "${command} sonar:sonar"
 			}
-		}	
+		}
+	stage("Build Docker Image"){
+		withDockerRegistry(credentialsId: 'dockerhub-credential', url: 'https://hub.docker.com/') {
+			app=docker.build(dockerrock123/sonarqubetest)
+		}
+	}
+	stage("Docker Push"){
+			app.push("${env.BUILD_NUMBER}")
+ 	 		app.push("latest")
+	}
 }

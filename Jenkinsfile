@@ -16,8 +16,7 @@ node{
 			}
 		}
 	stage("Build Docker Image"){
-		withDockerRegistry(credentialsId: 'dockerhub-credential', url: 'https://hub.docker.com/') {
-			app=docker.build(dockerrock123/sonarqubetest)
+		bat "docker build -t dockerrock123/sonarqube:1.0 ."
 		}
 	}
 	

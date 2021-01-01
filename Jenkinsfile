@@ -17,7 +17,7 @@ node{
 		}
 	stage("Build Docker Image"){
 		bat "docker build -t dockerrock123/sonarqube:1.0 ."
-		}
+		
 	}
 	
 }

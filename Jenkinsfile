@@ -20,8 +20,8 @@ node{
 		
 	}
 	stage("Build Push Image"){
-		withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhub-credential')]) {
- 	   		bat "docker login -u dockerrock123 -p ${dockerhub-credential}"
+		withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerlogin-pwd')]) {
+ 			   		bat "docker login -u dockerrock123 -p ${dockerlogin-pwd}"
 		}
 		bat "docker push dockerrock123/sonarqube:1.0"	
 	}

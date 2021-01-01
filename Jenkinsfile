@@ -20,8 +20,5 @@ node{
 			app=docker.build(dockerrock123/sonarqubetest)
 		}
 	}
-	stage("Docker Push"){
-			app.push("${env.BUILD_NUMBER}")
- 	 		app.push("latest")
-	}
+	
 }

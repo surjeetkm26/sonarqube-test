@@ -28,6 +28,6 @@ node{
 		
 	}
 	stage("deploy to GKE"){
-			kubernetesDeploy kubeconfigId: 'mykubeconfig', configs: 'deployment.yml', enableConfigSubstitution: true	
+			kubernetesDeploy(configs: 'deployment.yml',kubeconfigId: 'mykubeconfig')	
 	}
 }

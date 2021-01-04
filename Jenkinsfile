@@ -16,8 +16,7 @@ node{
 			}
 		}
 	stage("Build Docker Image"){
-		bat "docker build -t dockerrock123/sonarqube:1.0 ."
-		
+		bat "docker build -t dockerrock123/sonarqube:1.0 ."		
 	}
 	stage("Build Push Image"){
 		withCredentials([string(credentialsId: 'dockerlogin', variable: 'dockerlogin')]) {
@@ -25,5 +24,10 @@ node{
 		}
 		bat "docker push dockerrock123/sonarqube:1.0"	
 	}
-	
+	stage("Twist scan"){
+		
+	}
+	stage("deploy to GKE"){
+			kubernetesDeploy kubeconfigId: 'mykubeconfig', configs: 'deployment.yml', enableConfigSubstitution: true	
+	}
 }

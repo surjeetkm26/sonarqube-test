@@ -9,7 +9,7 @@ node{
 	}
 	
 	stage("Build Docker Image"){
-		bat "docker build -t dockerrock123/sonarqube:1.0 ."		
+		app=docker.build('kubernetes-pro/sonarqube:v1')
 	}
 	stage("Push Docker image to Container Registry"){
 			docker.withRegistry('https://eu.gcr.io', 'gcr:gke') {

@@ -18,16 +18,11 @@ node{
 	stage("Build Docker Image"){
 		bat "docker build -t dockerrock123/sonarqube:1.0 ."		
 	}
-	stage("Build Push Image"){
-		withCredentials([string(credentialsId: 'dockerlogin', variable: 'dockerlogin')]) {
- 			   		bat "docker login -u dockerrock123 -p ${dockerlogin}"
+	stage("Push Docker image to Container Registry"){
+			docker.withRegistry('https://eu.gcr.io', 'gcr:gke') {
+ 	 		app.push()
+ 	 		
 		}
-		bat "docker push dockerrock123/sonarqube:1.0"	
 	}
-	stage("Twist scan"){
-		
-	}
-	stage("deploy to GKE"){
-			kubernetesDeploy(configs: 'deployment.yml',kubeconfigId: 'mykubeconfig')	
-	}
+	
 }

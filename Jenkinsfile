@@ -9,11 +9,12 @@ node{
 	}
 	
 	stage("Build Docker Image"){
-		app=docker.build('kubernetes-pro/sonarqube:v1')
+		app=docker.build('kubernetes-pro-300804/sonarqube:v1')
 	}
 	stage("Push Docker image to Container Registry"){
 			docker.withRegistry('https://eu.gcr.io', 'gcr:gke') {
- 	 		app.push()
+ 	 		app.push("${env.BUILD_NUMBER}")
+    		app.push("latest")
  	 		
 		}
 	}

@@ -1,33 +1,41 @@
-apiVersion: extensions/v1beta1
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace
+---
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sonar-config
-  labels:
-    app: sonar-config
+   name: sonar-deployment
+   labels:
+      app: test
+      env: dev
+   namespace: my-namespace
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: sonar-config
-  template:
-    metadata:
-      labels:
-        app: sonar-config
-    spec:
-      containers:
-      - name: sonar-config
-        image: dockerrock123/sonarqube:1.0
-        ports:
-        - containerPort: 8080
-        
----
+   replicas: 3
+   selector:
+      matchLabels:
+        app: test
+   template:
+      metadata:
+         labels:
+            app: test
+      spec:
+        containers:
+          - name: deployment-container
+            image: dockerrock123/sonarqube:1.0
+            imagePullPolicy: IfNotPresent
+            ports:
+              - containerPort: 8080
+                protocol: TCP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: sonar-config
+  name: my-service
   labels:
-    app: sonar-config
+    app: test
+  namespace: my-namespace
 spec:
   type: NodePort
   ports:
@@ -35,4 +43,4 @@ spec:
     targetPort: 8080
     protocol: TCP
   selector:
-    app: sonar-config
+    app: test

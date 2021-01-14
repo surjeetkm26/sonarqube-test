@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
    name: k8s-configmap
 data:
-  application.properties: |
-    message.test=Welcome To India!
+  application.properties: |-
+    message.test=Welcome To India

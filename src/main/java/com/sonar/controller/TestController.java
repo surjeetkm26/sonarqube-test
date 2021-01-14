@@ -17,7 +17,7 @@ import com.sonar.model.Student;
 public class TestController {
 
    private static Map<String, List<Student>> schooDB = new HashMap<String, List<Student>>();
-   @Value("${message.test:default}")
+   @Value("${message.test}")
    private String message;
    
    @Value("${test.password}")
@@ -56,7 +56,7 @@ public class TestController {
         }
         return studentList;
     }
-    @GetMapping("/getsecure")
+    @GetMapping("/getpassword")
     public String getSecure() {
     	return password;
     }

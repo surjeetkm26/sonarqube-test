@@ -30,6 +30,8 @@ node{
 		bat "docker push dockerrock123/sonarqube:1.0"	
 	}
 	stage("deploy to GKE"){
-			kubernetesDeploy(configs: 'deployment.yml',kubeconfigId: 'k8configid')	
+			kubernetesDeploy(configs: 'deployment.yml',
+							 kubeconfigId: 'k8configid',
+							 enableConfigSubstitution: true)	
 	}
 }
